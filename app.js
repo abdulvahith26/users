@@ -1,11 +1,11 @@
 // import express
 const express = require('express');
 const authRouter = require('./routes/authRoutes');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 
 
-const morgan = require('morgan');
-const logger = require('./utils/logger');
+// const morgan = require('morgan');
+// const logger = require('./utils/logger');
 
 // create an express app
 const app = express();
