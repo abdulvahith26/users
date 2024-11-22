@@ -1,6 +1,8 @@
 // import express
 const express = require('express');
-const authRouter = require('./controlllers/authController');
+const authRouter = require('./routes/authroutes');
+
+
 // const cookieParser = require('cookie-parser');
 
 

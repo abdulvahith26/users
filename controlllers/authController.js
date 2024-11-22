@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const  jwt = require('jsonwebtoken');
@@ -38,7 +37,7 @@ const authController = {
 
         try{
                 //get user details
-            const {email,password} = request.body
+            const {email,password} = request.body;
 
             //check user exist 
             const user = await User.findOne({email});
@@ -49,7 +48,7 @@ const authController = {
             }
 
             //check password
-             const passwordIsValid = await bcrypt.compare(password, User.password);
+             const passwordIsValid = await bcrypt.compare(password, user.password);
 
              //if password is !correct
 
@@ -63,9 +62,7 @@ const authController = {
 
              //store the token in cookies
 
-             response.cookie('token', token,{httpOnly: true });
-
-
+             response.cookie('token', token,{httpOnly: true }); 
 
 
 
