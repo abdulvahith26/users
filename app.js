@@ -4,12 +4,6 @@ const authRouter = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser')
 
 
-// const cookieParser = require('cookie-parser');
-
-
-// const morgan = require('morgan');
-// const logger = require('./utils/logger');
-
 // create an express app
 const app = express();
 
@@ -23,6 +17,19 @@ app.use(cookieParser());
 
 // define the root route
 app.use('/api/v1/auth', authRouter);
+
+app.get('/', (req, res) => {
+    res.json({
+         message : 'redirect to /api/v1/auth' ,
+         redirect : '/api/v1/auth' 
+          });
+});
+app.get('/api/v1/auth', (req, res) => {
+    res.json({
+        sucess: true ,
+         message : " connect  to the DB " });
+    });
+
 
 // export the app
 module.exports = app;
