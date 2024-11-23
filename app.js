@@ -2,6 +2,7 @@
 const express = require('express');
 const authRouter = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser')
+const mongoose = require('mongoose');
 
 
 // create an express app
@@ -19,15 +20,12 @@ app.use(cookieParser());
 app.use('/api/v1/auth', authRouter);
 
 app.get('/', (req, res) => {
-    res.json({
-         message : 'redirect to /api/v1/auth' ,
-         redirect : '/api/v1/auth' 
-          });
+    res.redirect('/api/v1/auth' );
 });
 app.get('/api/v1/auth', (req, res) => {
     res.json({
         sucess: true ,
-         message : " connect  to the DB " });
+         message : " connect  to the DB , welcome to /api/v1/auth" });
     });
 
 
