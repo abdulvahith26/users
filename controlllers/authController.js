@@ -2,6 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const  jwt = require('jsonwebtoken');
 require('dotenv').config();
+const  cookie = require('cookie-parser');
 
 const authController = {
      register: async(request,response) =>{
@@ -38,7 +39,7 @@ const authController = {
         try{
                 //get user details
             const {email,password} = request.body;
-
+             
             //check user exist 
             const user = await User.findOne({email});
 
@@ -58,11 +59,17 @@ const authController = {
 
              //generate token
 
-             const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
+             const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+             
 
              //store the token in cookies
 
              response.cookie('token', token,{httpOnly: true }); 
+             
+
+             //response
+
+             return response.status(200).json({message:"login successfull"})
 
 
 
@@ -73,9 +80,34 @@ const authController = {
 
     },
     logout: async(request,response) =>{
+        try{ 
+            // clr the saved token
+            response.clearCookie('token');
+
+
+            //success response
+
+            return response.status(200).json({message : "logout successfully"})
+
+        }catch(error){
+            return response.status(500).json({message : error.message})
+        }
+    },
+    me : async(request,response) =>{
+        try{
+            // get user id frm the req
+            const   userId  = request.userId
+
+            //find the  user id
+            const  user = await User.findById(userId).select('-password')
+            
+            return response.status(200).json({user});
+            
+        }catch(error){
+            return response.status(500).json({message: error.message})
+        }
 
     }
-
 
     }     
 module.exports = authController;

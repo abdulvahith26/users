@@ -1,6 +1,7 @@
 // import express
 const express = require('express');
 const authRouter = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser')
 
 
 // const cookieParser = require('cookie-parser');
@@ -14,9 +15,10 @@ const app = express();
 
 // add middleware to parse JSON
 app.use(express.json());
+app.use(cookieParser());
 
 // add middleware to parse cookies
-// app.use(cookieParser());
+app.use(cookieParser());
 
 // add middleware to log requests
 // app.use(morgan('dev'));
