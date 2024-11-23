@@ -20,9 +20,6 @@ app.use(cookieParser());
 // add middleware to parse cookies
 app.use(cookieParser());
 
-// add middleware to log requests
-// app.use(morgan('dev'));
-// app.use(logger);
 
 // define the root route
 app.use('/api/v1/auth', authRouter);

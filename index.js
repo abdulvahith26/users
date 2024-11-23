@@ -1,7 +1,10 @@
 // import mongoose
 const mongoose = require('mongoose');
 const app = require('./app');
+const  express = require('express')
+const port = process.env.PORT || 4000;
 require('dotenv').config();
+
 
 // connect to the database
 mongoose.connect(process.env.MONGODB_URI)
